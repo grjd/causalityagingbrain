@@ -1,10 +1,24 @@
 # Code and Dataset supplement "The aging human brain: A causal analysis of the effect of sex and age on brain volume"
 
-This repository contains code and data used in the following publication:
+This repository contains Python 3.6.9 code and data used in the following publication:
 
 **Citation**
 
 Jaime Gómez-Ramírez, Miguel A. Fernández-Blázquez, Javier González-Rosa, "The aging human brain: A causal analysis of the effect of sex and age on brain volume" (pre-print on BioRxiv: https://doi.org/10.1101/2020.11.20.391623)
+
+**Citation**
+```
+import os, sys
+import seaborn as sns
+import arviz as az
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pymc3 as pm
+from scipy import stats
+import warnings
+
+```   
 
 **Abstract**
 
