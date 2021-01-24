@@ -1,8 +1,9 @@
-# Code and Dataset supplement "The aging human brain: A causal analysis of the effect of sex and age on brain volume"
+# Code and Dataset supplement
 
 This repository contains code and data used in the following publication:
 
-J. Gomez-Ramirez et al, "The aging human brain: A causal analysis of the effect of sex and age on brain volume" (pre-print on BioRxiv: https://doi.org/10.1101/2020.11.20.391623)
+**Citation**
+Jaime Gómez-Ramírez, Miguel A. Fernández-Blázquez, Javier González-Rosa, "The aging human brain: A causal analysis of the effect of sex and age on brain volume" (pre-print on BioRxiv: https://doi.org/10.1101/2020.11.20.391623)
 
 **Abstract**
 The goal of this work is to study how brain volume loss at old age is affected by factors such as age, APOE gene, sex, and school level. The study of brain volume loss at old age relative to young age requires at least in principle two MRI scans performed at both young and old age. There is, however, a way to address the problem by having only one MRI scan at old age. We compute the total brain loss of elderly subjects as the ratio between the estimated brain volume and the estimated total intracranial volume. Magnetic resonance imaging (MRI) scans of 890 healthy subjects aged 70 to 85 were assessed. The causal analysis of factors affecting brain atrophy was performed using Probabilistic Bayesian Modeling and the Mathematics of Causal Inference.
@@ -11,25 +12,30 @@ How the brain ages and what are the reasons for sex differences in adult lifespa
 
 **Dataset description**
 
-The dataset contains two csv files: 
-- *df_fsl_lon.csv* is the Pandas dataframe containing the results of the automated segmentation performed with FSL 
-- *df_free_lon.csv* contains the  Pandas dataframe containing the results of the automated segmentation performed with FreeSurfer. 
+The dataset contains a csv file, it can be opened as a Pandas dataframe containing the results of the automated segmentation performed with FSL
 
-The fields include in the dataset are as follows:
-- _Age_ the age of the participant in the moemnt of performing the MRI scan (%.2f)
-- _Sex_ encoded as 0 Male and 1 Female
-- Subcortical Volume estimates use the nomenclature: [fsl|free] [R|L] [structure] where structure can be Thalamus, Accumbens, Pallidum, Hippocampus, Amygdala, Caudate and Putamen. The volume is expressed in mm^3.
+The dataset has 7 columns :
+    apoe    familial_ad  fcsrtlibdem_visita1  fr_BrainSegVol_to_eTIV_y1
+- _edad_visita1_: the age of the participant in the moemnt of performing the MRI scan (%.2f)
+- _sexo_: sex of the participant encoded as 0 Male and 1 Female
+- _nivel_educativo_: schooling level encoded as 0 \textit{no formal education}, 1 \textit{primary education}, 2 \textit{middle or high school degree} and 3 \textit{university degree}. 
+- _apoe_: APOE genotype was studied with total DNA isolated from peripheral blood following standard procedures. The APOE variable was coded 1 for the $\epsilon4$-carriers, and 0 for non-carriers. 
+- _familial_ad_: Family history of AD was coded as 0 for subjects with no parents or siblings diagnosed with dementia and 1 for those with at least one parent or a sibling diagnosed with dementia.
+- _fcsrtlibdem_visita1_: Cognitive status was determined with the Mini-Mental Status Examination (MMSE), Free and Cued Selective Reminding Test (FCSRT), Semantic fluency, Digit-Symbol Test and Functional Activities Questionnaire (FAQ). 
+- _fr_BrainSegVol_to_eTIV_y1_: brain2icv or brain volume estimate to intracraneal volume estimate ratio 
+
 
 ```
-
+df.shape
+(890, 7)
+df.columns
+Index(['edad_visita1', 'sexo', 'apoe', 'nivel_educativo', 'familial_ad',
+       'fcsrtlibdem_visita1', 'fr_BrainSegVol_to_eTIV_y1'],
+      dtype='object')
 ```   
 **MRI Data collection**
-A total of 4028 MRIs were collected in 5 years, 990 in the first visit, 768 in the second, 723 in the third, 634 in the fourth, 542 in the fifth, and 371 in the sixth year. The imaging data were acquired on a 3T General Electric scanner (GE Milwaukee) utilizing the following T1-weighted inversion recovery, flip angle 12°, 3-D pulse sequence: echo time _Min. full_, time inversion 600 ms, Receiver Bandwidth = 19.23 kHz, field of view = 24.0 cm, slice thickness = 1 mm, _Freq. x Phase = 288 x 288_.
-The preprocessing of MRI 3 Tesla images in this study consisted of generating an isotropic brain image with non-brain tissue removed. We used the initial, preprocessing step in the two computational segmentation tool used in this study: FSL pipeline _(fsl-anat)_ and the FreeSurfer pipeline _(recon-all)_. 
-We run both pipelines in an identical computational setting: Operating System Mac OS X, product version 10.14.5 and build version 18F132. The version of FreeSurfer is FreeSurfer-darwin-OSX-ElCapitan-dev-20190328-6241d26. The version of the BET tool for FSL is v2.1 - FMRIB Analysis Group, Oxford and the FIRST tool version is 6.0.
+The imaging data were acquired in the sagittal plane on a 3T General Electric scanner (GE Milwaukee, WI) utilizing T1-weighted inversion recovery, supine position, flip angle $12\circ$, 3-D pulse sequence: echo time \textit{Min. full}, time inversion 600 ms., Receiver Bandwidth $19.23$ kHz, field of view $= 24.0$ cm, slice thickness $1$ mm and Freq $\times$ Phase $288 \times 288$. The brain volume loss at the moment of having the MRI compared to the maximum brain volume is computed as the Brain Segmentation Volume to estimated Total Intracranial Volume (eTIV) \cite{eTIV} ratio (ICV and eTIV the FreeSurfer term for intracranial volume are used equivalently). The postprocessing was performed with FreeSurfer \cite{fischl2012freesurfer}, version freesurfer-darwin-OSX-ElCapitan-dev-20190328-6241d26 running under a Mac OS X, product version 10.14.5. For the sake of illustration, Figure \ref{fig:brains} shows the result produced of the intracranial volume segmentation for two subjects in the study. 
 
 _[FreeSurfer, 2017] FreeSurfer cortical reconstruction and parcellation process. (2017).Anatomical processing script:recon-all.
 https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all._
 
-_[FSL, 2017] FSL (2017). Anatomical processing script: fsl_anat. https://fsl.fmrib.ox.ac.uk/
-fsl/fslwiki/fsl_anat._ 
