@@ -6,7 +6,8 @@ This repository contains Python 3.6.9 code and data used in the following public
 
 Jaime Gómez-Ramírez, Miguel A. Fernández-Blázquez, Javier González-Rosa, "The aging human brain: A causal analysis of the effect of sex and age on brain volume" (pre-print on BioRxiv: https://doi.org/10.1101/2020.11.20.391623)
 
-**Citation**
+**Dependencies**
+Install and import the following libraires if not already available in your virtual environment. 
 ```
 import os, sys
 import seaborn as sns
@@ -17,7 +18,6 @@ import pandas as pd
 import pymc3 as pm
 from scipy import stats
 import warnings
-
 ```   
 
 **Abstract**
